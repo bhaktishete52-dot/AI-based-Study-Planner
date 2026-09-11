@@ -1,0 +1,661 @@
+/* =========================================
+   GENERAL
+========================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+
+    background: linear-gradient(
+        135deg,
+        #eef2ff,
+        #f8fafc
+    );
+
+    min-height: 100vh;
+
+    padding: 30px;
+
+    color: #1e293b;
+}
+
+
+/* =========================================
+   MAIN CONTAINER
+========================================= */
+
+.container {
+    width: 100%;
+    max-width: 850px;
+
+    margin: auto;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.header {
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+
+.icon {
+    width: 75px;
+    height: 75px;
+
+    margin: auto;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 38px;
+
+    background: white;
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.10);
+}
+
+
+.header h1 {
+    margin-top: 15px;
+
+    font-size: 30px;
+
+    color: #1e293b;
+}
+
+
+.header p {
+    margin-top: 8px;
+
+    color: #64748b;
+
+    font-size: 15px;
+}
+
+
+/* =========================================
+   COMMON CARD
+========================================= */
+
+.card,
+.subject-card,
+.performance {
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 16px;
+
+    margin-bottom: 20px;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+
+.card h2,
+.subject-card h2 {
+    margin-bottom: 20px;
+
+    color: #1e293b;
+
+    font-size: 21px;
+}
+
+
+/* =========================================
+   SUBJECT CARD
+========================================= */
+
+.subject-card {
+    border-left: 5px solid #2563eb;
+}
+
+
+.subject-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 15px;
+}
+
+
+.subject-title {
+    margin: 0 !important;
+
+    color: #1e293b;
+}
+
+
+/* =========================================
+   LABELS
+========================================= */
+
+label {
+    display: block;
+
+    font-weight: bold;
+
+    margin: 15px 0 7px;
+
+    color: #334155;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   INPUTS
+========================================= */
+
+input,
+select {
+    width: 100%;
+
+    padding: 13px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 8px;
+
+    font-size: 15px;
+
+    background: white;
+
+    color: #1e293b;
+}
+
+
+input::placeholder {
+    color: #94a3b8;
+}
+
+
+input:focus,
+select:focus {
+    outline: none;
+
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.10);
+}
+
+
+/* =========================================
+   ADD SUBJECT BUTTON
+========================================= */
+
+#addSubjectBtn {
+    width: 100%;
+
+    padding: 15px;
+
+    margin-bottom: 15px;
+
+    background: white;
+
+    color: #2563eb;
+
+    border: 2px dashed #2563eb;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+#addSubjectBtn:hover {
+    background: #eff6ff;
+
+    border-color: #1d4ed8;
+
+    color: #1d4ed8;
+}
+
+
+/* =========================================
+   REMOVE SUBJECT BUTTON
+========================================= */
+
+.remove-btn {
+    background: #fee2e2;
+
+    color: #dc2626;
+
+    border: none;
+
+    padding: 8px 13px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+    font-size: 13px;
+
+    transition: 0.2s;
+}
+
+
+.remove-btn:hover {
+    background: #fecaca;
+
+    color: #b91c1c;
+}
+
+
+/* =========================================
+   GENERATE BUTTON
+========================================= */
+
+#generateBtn {
+    width: 100%;
+
+    padding: 16px;
+
+    background: #2563eb;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 10px;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+#generateBtn:hover {
+    background: #1d4ed8;
+
+    transform: translateY(-1px);
+}
+
+
+#generateBtn:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================
+   PERFORMANCE RESULT
+========================================= */
+
+.performance {
+    text-align: center;
+}
+
+
+.performance h2 {
+    margin-bottom: 10px;
+}
+
+
+.score {
+    font-size: 55px;
+
+    font-weight: bold;
+
+    color: #2563eb;
+
+    margin: 15px;
+}
+
+
+.category {
+    display: inline-block;
+
+    padding: 8px 20px;
+
+    background: #dbeafe;
+
+    color: #1d4ed8;
+
+    border-radius: 20px;
+
+    font-weight: bold;
+}
+
+
+/* =========================================
+   STATISTICS
+========================================= */
+
+.stats {
+    display: flex;
+
+    gap: 15px;
+
+    margin-bottom: 20px;
+}
+
+
+.stats > div {
+    flex: 1;
+
+    background: white;
+
+    padding: 20px;
+
+    border-radius: 14px;
+
+    text-align: center;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+
+.stats strong {
+    display: block;
+
+    font-size: 24px;
+
+    color: #2563eb;
+
+    margin-bottom: 5px;
+}
+
+
+.stats span {
+    color: #64748b;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   SUBJECT PRIORITY
+========================================= */
+
+.subject-row {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 15px;
+
+    background: #f8fafc;
+
+    border-radius: 10px;
+
+    margin-bottom: 10px;
+}
+
+
+.subject-row p {
+    color: #64748b;
+
+    font-size: 14px;
+
+    margin-top: 5px;
+}
+
+
+.priority {
+    color: #2563eb;
+
+    font-weight: bold;
+
+    font-size: 18px;
+}
+
+
+/* =========================================
+   STUDY PLAN
+========================================= */
+
+.study-row {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 16px;
+
+    border-bottom: 1px solid #e2e8f0;
+}
+
+
+.study-row:last-child {
+    border-bottom: none;
+}
+
+
+.study-row strong {
+    color: #2563eb;
+}
+
+
+/* =========================================
+   TOTAL STUDY TIME
+========================================= */
+
+.total {
+    margin-top: 18px;
+
+    padding: 15px;
+
+    background: #eff6ff;
+
+    border-radius: 10px;
+
+    text-align: center;
+
+    color: #1e40af;
+}
+
+
+.total b {
+    margin-left: 5px;
+}
+
+
+/* =========================================
+   AI RECOMMENDATIONS
+========================================= */
+
+.recommendation {
+    padding: 14px;
+
+    background: #eff6ff;
+
+    color: #1e40af;
+
+    border-radius: 9px;
+
+    margin-bottom: 10px;
+
+    line-height: 1.5;
+}
+
+
+.recommendation:last-child {
+    margin-bottom: 0;
+}
+
+
+/* =========================================
+   BACK BUTTON
+========================================= */
+
+.back {
+    display: block;
+
+    text-align: center;
+
+    text-decoration: none;
+
+    background: #1e293b;
+
+    color: white;
+
+    padding: 14px;
+
+    border-radius: 10px;
+
+    margin-bottom: 30px;
+
+    transition: 0.2s;
+}
+
+
+.back:hover {
+    background: #0f172a;
+}
+
+
+/* =========================================
+   FORM SPACING
+========================================= */
+
+form {
+    width: 100%;
+}
+
+
+/* =========================================
+   MOBILE RESPONSIVE
+========================================= */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 15px;
+    }
+
+
+    .container {
+        width: 100%;
+    }
+
+
+    .header h1 {
+        font-size: 24px;
+    }
+
+
+    .header p {
+        font-size: 14px;
+    }
+
+
+    .card,
+    .subject-card,
+    .performance {
+        padding: 20px;
+    }
+
+
+    .subject-header {
+        align-items: flex-start;
+
+        gap: 10px;
+    }
+
+
+    .subject-title {
+        font-size: 18px !important;
+    }
+
+
+    .remove-btn {
+        padding: 7px 10px;
+
+        font-size: 12px;
+    }
+
+
+    .stats {
+        flex-direction: column;
+
+        gap: 10px;
+    }
+
+
+    .stats > div {
+        padding: 15px;
+    }
+
+
+    .score {
+        font-size: 45px;
+    }
+
+}
+
+
+/* =========================================
+   VERY SMALL SCREENS
+========================================= */
+
+@media (max-width: 400px) {
+
+    body {
+        padding: 10px;
+    }
+
+
+    .card,
+    .subject-card,
+    .performance {
+        padding: 16px;
+    }
+
+
+    .header h1 {
+        font-size: 21px;
+    }
+
+
+    .icon {
+        width: 60px;
+
+        height: 60px;
+
+        font-size: 30px;
+    }
+
+
+    #addSubjectBtn,
+    #generateBtn {
+        font-size: 14px;
+    }
+
+}

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>AI Personalized Study Planner</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <div class="icon">🎓</div>
+
+        <h1>AI Personalized Study Planner</h1>
+
+        <p>Create a personalized study plan using AI</p>
+
+    </div>
+
+
+    <form action="/predict" method="POST">
+
+
+        <!-- STUDENT DETAILS -->
+
+        <div class="card">
+
+            <h2>👤 Student Information</h2>
+
+            <label>Student Name</label>
+
+            <input
+                type="text"
+                name="student_name"
+                placeholder="Enter your name"
+                required
+            >
+
+            <label>Available Study Time Per Day</label>
+
+            <input
+                type="number"
+                name="available_hours"
+                min="1"
+                max="12"
+                step="0.5"
+                placeholder="Example: 3"
+                required
+            >
+
+            <label>Days Remaining for Exam</label>
+
+            <input
+                type="number"
+                name="exam_days"
+                min="1"
+                max="365"
+                placeholder="Example: 15"
+                required
+            >
+
+        </div>
+
+
+        <!-- SUBJECTS -->
+
+        <div id="subjects-container">
+
+
+            <!-- SUBJECT 1 -->
+
+            <div class="subject-card">
+
+                <div class="subject-header">
+
+                    <h2 class="subject-title">
+                        📘 Subject 1
+                    </h2>
+
+                    <button
+                        type="button"
+                        class="remove-btn"
+                        onclick="removeSubject(this)">
+                        Remove
+                    </button>
+
+                </div>
+
+
+                <label>Subject Name</label>
+
+                <input
+                    type="text"
+                    name="subject_name[]"
+                    placeholder="Example: Java"
+                    required
+                >
+
+
+                <label>Previous Marks (%)</label>
+
+                <input
+                    type="number"
+                    name="marks[]"
+                    min="0"
+                    max="100"
+                    placeholder="Example: 72"
+                    required
+                >
+
+
+                <label>Test Marks (%)</label>
+
+                <input
+                    type="number"
+                    name="test[]"
+                    min="0"
+                    max="100"
+                    placeholder="Example: 70"
+                    required
+                >
+
+
+                <label>Assignment Performance (%)</label>
+
+                <input
+                    type="number"
+                    name="assignment[]"
+                    min="0"
+                    max="100"
+                    placeholder="Example: 75"
+                    required
+                >
+
+
+                <label>Difficulty</label>
+
+                <select name="difficulty[]">
+
+                    <option value="1">Very Easy</option>
+                    <option value="2">Easy</option>
+                    <option value="3" selected>Medium</option>
+                    <option value="4">Hard</option>
+                    <option value="5">Very Hard</option>
+
+                </select>
+
+
+                <label>Revision Level</label>
+
+                <select name="revision[]">
+
+                    <option value="1">Very Low</option>
+                    <option value="2">Low</option>
+                    <option value="3" selected>Medium</option>
+                    <option value="4">Good</option>
+                    <option value="5">Excellent</option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <!-- ADD SUBJECT BUTTON -->
+
+        <button
+            type="button"
+            id="addSubjectBtn"
+            onclick="addSubject()">
+
+            + Add Subject
+
+        </button>
+
+
+        <!-- GENERATE BUTTON -->
+
+        <button
+            type="submit"
+            id="generateBtn">
+
+            🤖 Generate AI Study Plan
+
+        </button>
+
+
+    </form>
+
+</div>
+
+
+<script>
+
+let subjectCount = 1;
+
+
+/* =========================================
+   ADD SUBJECT
+========================================= */
+
+function addSubject() {
+
+    subjectCount++;
+
+    const container =
+        document.getElementById(
+            "subjects-container"
+        );
+
+
+    const newSubject =
+        document.createElement("div");
+
+
+    newSubject.className =
+        "subject-card";
+
+
+    newSubject.innerHTML = `
+
+        <div class="subject-header">
+
+            <h2 class="subject-title">
+                📘 Subject ${subjectCount}
+            </h2>
+
+            <button
+                type="button"
+                class="remove-btn"
+                onclick="removeSubject(this)">
+                Remove
+            </button>
+
+        </div>
+
+
+        <label>Subject Name</label>
+
+        <input
+            type="text"
+            name="subject_name[]"
+            placeholder="Example: Python"
+            required
+        >
+
+
+        <label>Previous Marks (%)</label>
+
+        <input
+            type="number"
+            name="marks[]"
+            min="0"
+            max="100"
+            placeholder="Example: 80"
+            required
+        >
+
+
+        <label>Test Marks (%)</label>
+
+        <input
+            type="number"
+            name="test[]"
+            min="0"
+            max="100"
+            placeholder="Example: 75"
+            required
+        >
+
+
+        <label>Assignment Performance (%)</label>
+
+        <input
+            type="number"
+            name="assignment[]"
+            min="0"
+            max="100"
+            placeholder="Example: 85"
+            required
+        >
+
+
+        <label>Difficulty</label>
+
+        <select name="difficulty[]">
+
+            <option value="1">Very Easy</option>
+            <option value="2">Easy</option>
+            <option value="3" selected>Medium</option>
+            <option value="4">Hard</option>
+            <option value="5">Very Hard</option>
+
+        </select>
+
+
+        <label>Revision Level</label>
+
+        <select name="revision[]">
+
+            <option value="1">Very Low</option>
+            <option value="2">Low</option>
+            <option value="3" selected>Medium</option>
+            <option value="4">Good</option>
+            <option value="5">Excellent</option>
+
+        </select>
+
+    `;
+
+
+    container.appendChild(newSubject);
+
+}
+
+
+/* =========================================
+   REMOVE SUBJECT
+========================================= */
+
+function removeSubject(button) {
+
+    const subjects =
+        document.querySelectorAll(
+            ".subject-card"
+        );
+
+
+    if (subjects.length === 1) {
+
+        alert(
+            "At least one subject is required."
+        );
+
+        return;
+    }
+
+
+    button
+        .closest(".subject-card")
+        .remove();
+
+
+    updateSubjectNumbers();
+
+}
+
+
+/* =========================================
+   UPDATE SUBJECT NUMBERS
+========================================= */
+
+function updateSubjectNumbers() {
+
+    const subjects =
+        document.querySelectorAll(
+            ".subject-card"
+        );
+
+
+    subjects.forEach(
+        function(subject, index) {
+
+            subject.querySelector(
+                ".subject-title"
+            ).textContent =
+                "📘 Subject " + (index + 1);
+
+        }
+    );
+
+
+    subjectCount =
+        subjects.length;
+
+}
+
+</script>
+
+
+</body>
+
+</html>
