@@ -1,27 +1,21 @@
 <!DOCTYPE html>
-
 <html>
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>AI Study Planner</title>
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='style.css') }}">
-
 </head>
-
 
 <body>
 
 <div class="container">
 
-
+    <!-- HEADER -->
     <div class="header">
 
         <div class="icon">
@@ -39,7 +33,6 @@
 
 
     <!-- PERFORMANCE -->
-
     <div class="performance">
 
         <h2>
@@ -47,26 +40,20 @@
         </h2>
 
         <div class="score">
-
             {{ predicted_performance }}%
-
         </div>
 
         <div class="category">
-
             {{ category }}
-
         </div>
 
     </div>
 
 
     <!-- STATISTICS -->
-
     <div class="stats">
 
         <div>
-
             <strong>
                 {{ exam_days }}
             </strong>
@@ -74,12 +61,10 @@
             <span>
                 Days Left
             </span>
-
         </div>
 
 
         <div>
-
             <strong>
                 {{ daily_minutes }} min
             </strong>
@@ -87,12 +72,10 @@
             <span>
                 Daily Study Time
             </span>
-
         </div>
 
 
         <div>
-
             <strong>
                 {{ subjects|length }}
             </strong>
@@ -100,20 +83,17 @@
             <span>
                 Subjects
             </span>
-
         </div>
 
     </div>
 
 
     <!-- SUBJECT PRIORITY -->
-
     <div class="card">
 
         <h2>
             🎯 Smart Subject Priority
         </h2>
-
 
         {% for subject in subjects %}
 
@@ -135,9 +115,7 @@
 
 
             <div class="priority">
-
                 {{ subject.priority }}/100
-
             </div>
 
         </div>
@@ -148,29 +126,22 @@
 
 
     <!-- DAILY PLAN -->
-
     <div class="card">
 
         <h2>
             📚 Today's Study Plan
         </h2>
 
-
         {% for subject in subjects %}
 
         <div class="study-row">
 
             <span>
-
                 {{ subject.name }}
-
             </span>
 
-
             <strong>
-
                 {{ subject.time }}
-
             </strong>
 
         </div>
@@ -192,13 +163,11 @@
 
 
     <!-- WEAK AREAS -->
-
     <div class="card">
 
         <h2>
             🧠 Weak Area Detection
         </h2>
-
 
         {% for subject in subjects %}
 
@@ -221,13 +190,11 @@
 
 
     <!-- STUDY STRATEGY -->
-
     <div class="card">
 
         <h2>
             💡 Personalized Study Strategy
         </h2>
-
 
         {% for subject in subjects %}
 
@@ -249,13 +216,11 @@
 
 
     <!-- DAY-WISE PLAN -->
-
     <div class="card">
 
         <h2>
             📅 7-Day Study Roadmap
         </h2>
-
 
         {% for day in day_plan %}
 
@@ -290,7 +255,6 @@
 
 
     <!-- ADAPTIVE PLANNING -->
-
     <div class="card adaptive">
 
         <h2>
@@ -305,13 +269,11 @@
 
 
     <!-- RECOMMENDATIONS -->
-
     <div class="card">
 
         <h2>
             🤖 AI Recommendations
         </h2>
-
 
         {% for recommendation in recommendations %}
 
@@ -327,7 +289,6 @@
 
 
     <!-- PROGRESS -->
-
     <div class="card">
 
         <h2>
@@ -352,14 +313,14 @@
             </div>
 
 
-            <div class="progress-bar">
+           <div class="progress-bar">
 
-                <div
-                    class="progress"
-                    style="width: {{ subject.marks }}%">
-                </div>
+    <div
+        class="progress"
+        data-width="{{ subject.marks }}">
+    </div>
 
-            </div>
+</div>
 
         </div>
 
@@ -368,6 +329,7 @@
     </div>
 
 
+    <!-- BACK BUTTON -->
     <a
         href="/"
         class="back">
@@ -378,7 +340,12 @@
 
 
 </div>
-
+<script>
+    document.querySelectorAll('.progress').forEach(function (bar) {
+        const width = bar.getAttribute('data-width');
+        bar.style.width = width + '%';
+    });
+</script>
 </body>
 
 </html>
